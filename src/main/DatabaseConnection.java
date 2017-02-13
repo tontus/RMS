@@ -12,6 +12,7 @@ package main;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 public class DatabaseConnection {
     static final String driver = "com.mysql.jdbc.Driver";  
@@ -22,7 +23,7 @@ public class DatabaseConnection {
     static Statement stmt = null;
     static ResultSet rs ;
 
-     public DatabaseConnection() {
+    public void startConnection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
 //            System.out.println("Connecting to database...");
@@ -31,12 +32,28 @@ public class DatabaseConnection {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-     public void insertData(String sql) {
+    public void stopConnection(){
         try {
-            stmt = conn.createStatement();
-            rs=stmt.executeQuery(sql);
-            System.out.println(""+rs.getFetchSize());
+            rs.close();
+            stmt.close();
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
+     public void insertData(Object[][] data) {
+        try {
+            
+            for(int i=0; i<data.length;i++)
+                for(int j=0; j<data[0].length;j++)
+                {
+                    String sql = null;
+                    stmt = conn.createStatement();
+                    rs=stmt.executeQuery(sql);
+                    System.out.println(""+rs.getFetchSize());
+                }
+            
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,6 +89,7 @@ public class DatabaseConnection {
     
     public static void main(String[] args) {
         DatabaseConnection data =new DatabaseConnection();
+        data.startConnection();
         
         try {
             stmt = conn.createStatement();
@@ -80,11 +98,12 @@ public class DatabaseConnection {
             while (rs.next()) {
                 size++;
             }rs.beforeFirst();
-while (rs.next())
+        while (rs.next())
             System.out.println(""+rs.getString("gpa"));
         } catch (SQLException ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+        data.stopConnection();
 }
 
    
