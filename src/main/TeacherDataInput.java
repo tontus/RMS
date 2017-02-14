@@ -10,8 +10,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.JTableHeader;
+
 
 /**
  *
@@ -48,6 +46,7 @@ public class TeacherDataInput {
     JButton btnInput;
     
     static int noStudent;
+    boolean success = false;
     
 //    Object[][] data;
     
@@ -73,47 +72,49 @@ public class TeacherDataInput {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 JOptionPane.showMessageDialog(frame, "Hello");
+                table.getValueAt(noStudent, noStudent);
+                
             }
         });
         
         
         btnOkay = new JButton("Okay");
+        
         btnOkay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
-                
-                try{
-                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfDept.getText().equals("")||tfSeasson.getText().equals("")){
+                try {
+                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfDept.getText().equals("")||tfSeasson.getText().equals(""))
+                        throw new BlankBoxException();
+                    noStudent = Integer.parseInt(tfNoStudent.getText());
                     
                     
-                        throw new blankBoxException();
                     
-                }
-                noStudent = Integer.parseInt(tfNoStudent.getText());
-                }
-                catch (blankBoxException ex) {
+                    String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Attendence"};
+                    Object[][] data = new Object[noStudent][5];
+                    //Object[][] data = {{"Kathy", "Smith","Snowboarding", new Integer(5), new Boolean(false)}, {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},{"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)}, {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},{"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}};
+                    table = new JTable(data, columnName);
+                    c.gridx = 1;
+                    c.gridy = 7;
+                    c.weighty=1;
+                    panel.add(new JScrollPane(table), c);
+                    panel.remove(btnOkay);
+                    c.gridx = 1;
+                    c.gridy = 9;
+                    panel.add(btnInput, c);
+                    frame.revalidate();
+                    frame.repaint();
+                } catch (BlankBoxException ex) {
                         JOptionPane.showMessageDialog(frame, "Please Don't leave any box blank ","ERROR",JOptionPane.ERROR_MESSAGE);
-                        throw ex;
+                    
+//                        throw ex;//this error may be a glitch
+                         
+                   
                     }
-                catch(Exception e){
+                catch(NumberFormatException e){
                     JOptionPane.showMessageDialog(frame, "Please enter a valid number ","ERROR",JOptionPane.ERROR_MESSAGE);
-                    throw e;
+//                    throw e;
                 }
-                String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Attendence"};
-                Object[][] data = new Object[noStudent][5];
-                //Object[][] data = {{"Kathy", "Smith","Snowboarding", new Integer(5), new Boolean(false)}, {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},{"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)}, {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},{"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}};
-                table = new JTable(data, columnName);
-                c.gridx = 1;
-                c.gridy = 7;
-                c.weighty=1;
-                panel.add(new JScrollPane(table), c);
-                panel.remove(btnOkay);
-                c.gridx = 1;
-                c.gridy = 9;
-                panel.add(btnInput, c);
-                frame.revalidate();
-                frame.repaint();
             }
         });
         
@@ -121,7 +122,7 @@ public class TeacherDataInput {
         
         
         
-        
+         
         panel = new JPanel(new GridBagLayout());
         c.gridx = -1;
         c.gridy = 1;
@@ -156,6 +157,7 @@ public class TeacherDataInput {
         c.gridx = 1;
         c.gridy = 6;
         panel.add(btnOkay, c);
+
         
         
         
@@ -168,12 +170,13 @@ public class TeacherDataInput {
         frame.setLocation(300,000);
         frame.add(panel);
     }
+    public static void main(String[] args) {
+        TeacherDataInput td = new TeacherDataInput();
+    }
+   
 
-    private static class blankBoxException  extends Exception{
-
-        public blankBoxException() {
-            
-        }
+    private static class BlankBoxException  extends Exception {
+       
     }
     
     

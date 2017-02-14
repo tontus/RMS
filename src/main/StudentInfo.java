@@ -34,12 +34,16 @@ public class StudentInfo {
     
     StudentInfo(int regNo){
         GridBagConstraints c = new GridBagConstraints();
+        DatabaseConnection db = new DatabaseConnection();
+        
         this.regNo = regNo;
+        db.startConnection();
         
         lblRegNo = new JLabel("Registration No:     " + regNo);
         
-        String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Attendence"};
-        Object[][] data = new Object[3][5];
+        String[] columnName = {"Course name", "Course code", "course credit", "GPA"};
+        Object[][] data = db.getData(regNo);
+        db.stopConnection();
         table = new JTable(data, columnName);
         
         btnBack = new JButton("Back");

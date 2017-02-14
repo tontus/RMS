@@ -46,12 +46,11 @@ public class DatabaseConnection {
         try {
             
             for(int i=0; i<data.length;i++)
-                for(int j=0; j<data[0].length;j++)
                 {
                     String sql = null;
+                    sql="INSERT INTO `results`VALUES (NULL, '"+data[i][0]+"', '"+data[i][1]+"', '"+data[i][2]+"', '"+data[i][3]+"', '"+data[i][4]+"');";
                     stmt = conn.createStatement();
-                    rs=stmt.executeQuery(sql);
-                    System.out.println(""+rs.getFetchSize());
+                    stmt.executeUpdate(sql);
                 }
             
         } catch (SQLException ex) {
@@ -75,12 +74,12 @@ public class DatabaseConnection {
         try {
             while(rs.next())
             {
-                results[rs.getRow()][1]= rs.getString("courseName");
-                results[rs.getRow()][2]= rs.getString("courseCode");
-                results[rs.getRow()][3]= rs.getString("courseCredit");
-                results[rs.getRow()][4]= rs.getString("gpa");
+                results[rs.getRow()-1][0]= rs.getString("courseName");
+                results[rs.getRow()-1][1]= rs.getString("courseCode");
+                results[rs.getRow()-1][2]= rs.getString("courseCredit");
+                results[rs.getRow()-1][3]= rs.getString("gpa");
             }
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return results;
@@ -93,7 +92,7 @@ public class DatabaseConnection {
         
         try {
             stmt = conn.createStatement();
-            rs=stmt.executeQuery("SELECT * FROM `results` WHERE `regiNo` = 1");
+            stmt.executeUpdate("INSERT INTO `results` VALUES (NULL, '6', '3', 'fgert', 'efdsrt', '7');");
             int size=0;
             while (rs.next()) {
                 size++;
