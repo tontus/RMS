@@ -32,6 +32,8 @@ public class Home {
     JButton teacherInputBtn;
     JButton calculateCGPABtn;
     
+    static int regNo;
+    String strRegNo;
     
     Home(){
         GridBagConstraints c = new GridBagConstraints();
@@ -40,7 +42,16 @@ public class Home {
         
         regNoInputField = new JTextField(11);
         
+        
         resultBtn = new JButton("See Result");
+        resultBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                regNo = Integer.parseInt(regNoInputField.getText());
+                new StudentInfo(regNo);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
         teacherInputBtn = new JButton("Teacher's Input");
         teacherInputBtn.addActionListener(new ButtonListener());
         calculateCGPABtn = new JButton("Calculate CGPA");

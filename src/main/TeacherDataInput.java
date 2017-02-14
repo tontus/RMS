@@ -71,6 +71,7 @@ public class TeacherDataInput {
         btnInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                
                 JOptionPane.showMessageDialog(frame, "Hello");
                 table.getValueAt(noStudent, noStudent);
                 
@@ -83,10 +84,12 @@ public class TeacherDataInput {
         btnOkay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+
                 try {
                     if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfDept.getText().equals("")||tfSeasson.getText().equals(""))
                         throw new BlankBoxException();
                     noStudent = Integer.parseInt(tfNoStudent.getText());
+
                     
                     
                     
