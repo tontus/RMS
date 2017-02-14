@@ -18,10 +18,17 @@ public class CalculateCG {
             grade += grd*crd;
         }
     }
-    double calculate(){
+    void reset(){
+        credit = 0;
+        grade = 0;
+    }
+    double getResult(){
         double result;
         result = grade/credit;
         
         return result;
+    }
+    double getCredit(){
+        return credit;
     }
 }

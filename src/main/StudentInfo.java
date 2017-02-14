@@ -7,6 +7,9 @@ package main;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -29,6 +32,7 @@ public class StudentInfo {
     JTable table;
     
     JButton btnBack;
+    JButton btnHome;
     
     private int regNo;
     
@@ -43,6 +47,13 @@ public class StudentInfo {
         table = new JTable(data, columnName);
         
         btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new Home();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
         
         panel = new JPanel(new GridBagLayout());
         c.gridx = -1;
@@ -57,6 +68,7 @@ public class StudentInfo {
         
         frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setLocation(300, 0);
         frame.setSize(600, 768);
         frame.add(panel);
         frame.setVisible(true);

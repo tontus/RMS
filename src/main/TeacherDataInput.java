@@ -72,6 +72,7 @@ public class TeacherDataInput {
         btnInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
+                
                 JOptionPane.showMessageDialog(frame, "Hello");
             }
         });
@@ -81,7 +82,6 @@ public class TeacherDataInput {
         btnOkay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
                 
                 try{
                     if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfDept.getText().equals("")||tfSeasson.getText().equals("")){
