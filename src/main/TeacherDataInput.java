@@ -5,11 +5,13 @@
  */
 package main;
 
+import calculations.Result;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,24 +33,29 @@ public class TeacherDataInput {
     JLabel lblCourseName;
     JLabel lblCourseCode;
     JLabel lblNoStudent;
-    JLabel lblDept;
+    JLabel lblCredit;
     JLabel lblSeasson;
+    JLabel lblClassNo;
     
     JTextField tfCourseName;
     JTextField tfCourseCode;
     JTextField tfNoStudent;
-    JTextField tfDept;
+    JTextField tfCredit;
     JTextField tfSeasson;
+    JTextField tfClassNo;
     
     JTable table;
     
     JButton btnOkay;
     JButton btnInput;
+    JButton btnHome;
     
     static int noStudent;
     boolean success = false;
     
 //    Object[][] data;
+    
+    static Object[][] inputData;
     
     TeacherDataInput(){
         GridBagConstraints c = new GridBagConstraints();
@@ -56,15 +63,16 @@ public class TeacherDataInput {
         lblCourseName = new JLabel("Course Name:");
         lblCourseCode = new JLabel("Course Code:");
         lblNoStudent = new JLabel("No of Student:");
-        lblDept = new JLabel("Department:");
+        lblCredit = new JLabel("Credit:");
         lblSeasson = new JLabel("Seasson:");
+        lblClassNo = new JLabel("Classes:");
         
         tfCourseName = new JTextField(15);
         tfCourseCode = new JTextField(15);
         tfNoStudent = new JTextField(15);
-        tfDept = new JTextField(15);
+        tfCredit = new JTextField(15);
         tfSeasson = new JTextField(15);
-        
+        tfClassNo = new JTextField(15);
         
         
         btnInput = new JButton("Input");
@@ -73,6 +81,16 @@ public class TeacherDataInput {
             public void actionPerformed(ActionEvent ae) {
                 
                 JOptionPane.showMessageDialog(frame, "Hello");
+                Result result = new Result();
+                inputData = new Object[noStudent][5];
+                for(int i=0; i<noStudent; i++)
+                {
+                    inputData[i][0] = table.getValueAt(i, 0);
+                    inputData[i][1] = Double.parseDouble(tfCredit.getText());
+                    inputData[i][2] = tfCourseName.getText();
+                    inputData[i][3] = tfCourseCode.getText();
+                    inputData[i][4] = result.getGP(Integer.parseInt(tfClassNo.getText()), Integer.parseInt((String) table.getValueAt(i, 1)), Integer.parseInt((String) table.getValueAt(i, 2)), Integer.parseInt((String) table.getValueAt(i, 3)), Integer.parseInt((String) table.getValueAt(i, 4)));
+                }
                 table.getValueAt(noStudent, noStudent);
                 
             }
@@ -80,25 +98,25 @@ public class TeacherDataInput {
         
         
         btnOkay = new JButton("Okay");
-        
         btnOkay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
 
                 try {
-                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfDept.getText().equals("")||tfSeasson.getText().equals(""))
+                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfCredit.getText().equals("")||tfSeasson.getText().equals("")||tfClassNo.getText().equals(""))
                         throw new BlankBoxException();
                     noStudent = Integer.parseInt(tfNoStudent.getText());
 
                     
                     
                     
-                    String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Attendence"};
+                    String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Semester Final"};
                     Object[][] data = new Object[noStudent][5];
                     //Object[][] data = {{"Kathy", "Smith","Snowboarding", new Integer(5), new Boolean(false)}, {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},{"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)}, {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},{"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}};
                     table = new JTable(data, columnName);
+                    panel.add(tfClassNo, c);
                     c.gridx = 1;
-                    c.gridy = 7;
+                    c.gridy = 8;
                     c.weighty=1;
                     panel.add(new JScrollPane(table), c);
                     panel.remove(btnOkay);
@@ -121,7 +139,14 @@ public class TeacherDataInput {
             }
         });
         
-        
+        btnHome = new JButton("Home");
+        btnHome.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new Home();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        });
         
         
         
@@ -141,10 +166,10 @@ public class TeacherDataInput {
         panel.add(tfCourseCode, c);
         c.gridx = -1;
         c.gridy = 3;
-        panel.add(lblDept, c);
+        panel.add(lblCredit, c);
         c.gridx = 1;
         c.gridy = 3;
-        panel.add(tfDept, c);
+        panel.add(tfCredit, c);
         c.gridx = -1;
         c.gridy = 4;
         panel.add(lblSeasson, c);
@@ -157,9 +182,18 @@ public class TeacherDataInput {
         c.gridx = 1;
         c.gridy = 5;
         panel.add(tfNoStudent, c);
+        c.gridx = -1;
+        c.gridy = 6;
+        panel.add(lblClassNo, c);
         c.gridx = 1;
         c.gridy = 6;
+        panel.add(tfClassNo, c);
+        c.gridx = 1;
+        c.gridy = 7;
         panel.add(btnOkay, c);
+        c.gridx = 1;
+        c.gridy = 10;
+        panel.add(btnHome, c);
 
         
         

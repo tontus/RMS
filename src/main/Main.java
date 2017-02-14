@@ -5,6 +5,8 @@
  */
 package main;
 
+import calculations.CalculateCG;
+
 /**
  *
  * @author mainu
