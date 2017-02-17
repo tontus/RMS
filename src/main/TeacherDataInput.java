@@ -6,6 +6,8 @@
 package main;
 
 import calculations.Result;
+import customSwing.CButton;
+import customSwing.CPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
