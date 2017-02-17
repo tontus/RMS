@@ -36,6 +36,10 @@ public class TeacherDataInput {
     JLabel lblCredit;
     JLabel lblSeasson;
     JLabel lblClassNo;
+    JLabel lblTT1;
+    JLabel lblTT2;
+    JLabel lblSemFinal;
+   
     
     JTextField tfCourseName;
     JTextField tfCourseCode;
@@ -43,6 +47,9 @@ public class TeacherDataInput {
     JTextField tfCredit;
     JTextField tfSeasson;
     JTextField tfClassNo;
+    JTextField tfTT1;
+    JTextField tfTT2;
+    JTextField tfSemFinal;
     
     JTable table;
     
@@ -65,7 +72,10 @@ public class TeacherDataInput {
         lblNoStudent = new JLabel("No of Student:");
         lblCredit = new JLabel("Credit:");
         lblSeasson = new JLabel("Seasson:");
-        lblClassNo = new JLabel("Classes:");
+        lblClassNo = new JLabel("Total Classes:");
+        lblTT1 = new JLabel("Total TT1 Number: ");
+        lblTT2 = new JLabel("Total TT2 Number: ");
+        lblSemFinal = new JLabel("Total semiste final number:");
         
         tfCourseName = new JTextField(15);
         tfCourseCode = new JTextField(15);
@@ -73,8 +83,10 @@ public class TeacherDataInput {
         tfCredit = new JTextField(15);
         tfSeasson = new JTextField(15);
         tfClassNo = new JTextField(15);
-        
-        
+        tfTT1 = new JTextField(15);
+        tfTT2 = new JTextField(15);
+        tfSemFinal = new JTextField(15);
+                
         btnInput = new JButton("Input");
         btnInput.addActionListener(new ActionListener() {
             @Override
@@ -89,7 +101,16 @@ public class TeacherDataInput {
                     inputData[i][1] = Double.parseDouble(tfCredit.getText());
                     inputData[i][2] = tfCourseName.getText();
                     inputData[i][3] = tfCourseCode.getText();
-                    inputData[i][4] = result.getGP(Integer.parseInt(tfClassNo.getText()), Integer.parseInt((String) table.getValueAt(i, 1)), Integer.parseInt((String) table.getValueAt(i, 2)), Integer.parseInt((String) table.getValueAt(i, 3)), Integer.parseInt((String) table.getValueAt(i, 4)));
+                    inputData[i][4] = result.getGP(
+                            Integer.parseInt(tfClassNo.getText()),
+                            Integer.parseInt(tfTT1.getText()),
+                            Integer.parseInt(tfTT2.getText()),
+                            Integer.parseInt(tfSemFinal.getText()),
+                            Integer.parseInt((String) table.getValueAt(i, 1)), 
+                            Integer.parseInt((String) table.getValueAt(i, 2)), 
+                            Integer.parseInt((String) table.getValueAt(i, 3)), 
+                            Integer.parseInt((String) table.getValueAt(i, 4))
+                    );
                 }
                 table.getValueAt(noStudent, noStudent);
                 
@@ -106,13 +127,8 @@ public class TeacherDataInput {
                     if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfCredit.getText().equals("")||tfSeasson.getText().equals(""))
                         throw new BlankBoxException();
                     noStudent = Integer.parseInt(tfNoStudent.getText());
-
-                    
-                    
-                    
                     String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Semester Final"};
                     Object[][] data = new Object[noStudent][5];
-                    //Object[][] data = {{"Kathy", "Smith","Snowboarding", new Integer(5), new Boolean(false)}, {"John", "Doe", "Rowing", new Integer(3), new Boolean(true)},{"Sue", "Black", "Knitting", new Integer(2), new Boolean(false)}, {"Jane", "White", "Speed reading", new Integer(20), new Boolean(true)},{"Joe", "Brown", "Pool", new Integer(10), new Boolean(false)}};
                     table = new JTable(data, columnName);
                     panel.add(tfClassNo, c);
                     c.gridx = 1;
@@ -134,9 +150,6 @@ public class TeacherDataInput {
                     frame.repaint();
                 } catch (BlankBoxException ex) {
                         JOptionPane.showMessageDialog(frame, "Please Don't leave any box blank ","ERROR",JOptionPane.ERROR_MESSAGE);
-                    
-//                        throw ex;//this error may be a glitch
-                         
                    
                     }
                 catch(NumberFormatException e){

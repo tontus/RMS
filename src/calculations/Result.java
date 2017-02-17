@@ -13,8 +13,8 @@ public class Result {
     public Result(){
         
     }
-    public double getGP(int totalClass, int atdClass, int tt1, int tt2, int semFinal){
-        int totalMarks = (tt1+tt2)/2 + semFinal + getAttendenceMark(atdClass/totalClass * 100);
+    public double getGP(int totalClass,int totTT1, int totTT2, int totSemFinal, int atdClass, int tt1, int tt2, int semFinal){
+        int totalMarks = (tt1*10/totTT1)+(tt1*10/totTT1) + (semFinal*70/totSemFinal) + getAttendenceMark(atdClass/totalClass * 100);
         
         if(totalMarks >= 80)
             return 4.0;
@@ -39,22 +39,15 @@ public class Result {
     
     
     int getAttendenceMark(int atdPercent){
-        if(atdPercent>=95)
-            return 10;
-        if(atdPercent>=90)
-            return 9;
-        if(atdPercent>=85)
-            return 8;
-        if(atdPercent>=80)
-            return 7;
-        if(atdPercent>=75)
-            return 6;
-        if(atdPercent>=70)
-            return 5;
-        if(atdPercent>=65)
-            return 4;
-        if(atdPercent>=60)
-            return 3;
+        
+        if(atdPercent>=95)return 10;
+        if(atdPercent>=90)return 9;
+        if(atdPercent>=85)return 8;
+        if(atdPercent>=80)return 7;
+        if(atdPercent>=75)return 6;
+        if(atdPercent>=70)return 5;
+        if(atdPercent>=65)return 4;
+        if(atdPercent>=60)return 3;
         return 0;
     }
 }
