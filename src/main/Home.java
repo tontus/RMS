@@ -6,6 +6,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -14,6 +15,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -40,6 +42,7 @@ public class Home {
     
     Home(){
         GridBagConstraints c = new GridBagConstraints();
+        
         label = new JLabel("Result Management Software");
         label.setLocation(100, 100);
         
@@ -47,22 +50,15 @@ public class Home {
         
         
         resultBtn = new CButton("See Result");
-        resultBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                regNo = Integer.parseInt(regNoInputField.getText());
-                new StudentInfo(regNo);
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-            }
-        });
+        resultBtn.addActionListener(new ListenerResult());
         teacherInputBtn = new CButton("Teacher's Input");
-        teacherInputBtn.addActionListener(new ButtonListener());
+        teacherInputBtn.addActionListener(new ListenerTeacherInput());
         calculateCGPABtn = new CButton("Calculate CGPA");
-        calculateCGPABtn.addActionListener(new CGButtonListener());
+        calculateCGPABtn.addActionListener(new ListenerCGCalculator());
         
         
-        panel = new JPanel(new GridBagLayout());
-        panel.setBackground(new Color(217,217,217));
+        panel = new CPanel(new GridBagLayout());
+//        panel.setBackground(new Color(217,217,217));
         c.gridx = 0;
         c.gridy = 0;
         panel.add(label, c);
@@ -85,7 +81,7 @@ public class Home {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
     
-    private class ButtonListener implements ActionListener{
+    private class ListenerTeacherInput implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -98,7 +94,7 @@ public class Home {
 
     }
     
-    private class CGButtonListener implements ActionListener{
+    private class ListenerCGCalculator implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -107,6 +103,24 @@ public class Home {
         }
         
     }
+    
+    private class ListenerResult implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent ae){
+            try{
+                regNo = Integer.parseInt(regNoInputField.getText());
+                new StudentInfo(regNo);
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }catch(NumberFormatException e){
+                JOptionPane.showMessageDialog(frame, "Please your Registration number ","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+     private static class BlankBoxException  extends Exception {
+       
+    }
+    
 }
 
 

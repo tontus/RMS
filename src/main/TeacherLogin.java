@@ -32,6 +32,9 @@ public class TeacherLogin {
     JPasswordField password;
     
     JButton btnLogin;
+    JButton btnBack;
+    
+
     
     TeacherLogin(){
         GridBagConstraints c = new GridBagConstraints();
@@ -41,17 +44,11 @@ public class TeacherLogin {
         teacherID.setName("ID");
         password = new JPasswordField(15);
         
-        btnLogin = new JButton("Login");
-        btnLogin.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent ae) {
-                String id = teacherID.getText();
-                String pass = password.getText();
-                if(id.equals("admin") && pass.equals("admin")){
-                    new TeacherDataInput();
-                    frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
-                }
-            }
-        });
+        btnLogin = new CButton("Login");
+        btnLogin.addActionListener(listenerLogin);
+         
+        btnBack = new CButton("Back");
+        btnBack.addActionListener(listenerBack);
         
         panel = new JPanel(new GridBagLayout());
         c.gridx = 0;
@@ -63,6 +60,9 @@ public class TeacherLogin {
         panel.add(password, c);
         c.gridy = 4;
         panel.add(btnLogin, c);
+        c.gridy++;
+        panel.add(btnBack, c);
+        
         frame = new JFrame("Teacher's Login");
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -70,4 +70,24 @@ public class TeacherLogin {
         frame.setLocation(300, 00);
         frame.setVisible(true);
     }
+    
+    ActionListener listenerBack = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            new Home();
+            frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+        }
+    };
+    
+    ActionListener listenerLogin = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            String id = teacherID.getText();
+            String pass = password.getText();
+            if(id.equals("admin") && pass.equals("admin")){
+                new TeacherDataInput();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            }
+        }
+    };
 }

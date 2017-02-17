@@ -45,12 +45,12 @@ public class StudentInfo {
         
         lblRegNo = new JLabel("Registration No:     " + regNo);
         
-        String[] columnName = {"Course name", "Course code", "course credit", "GPA"};
+        String[] columnName = {"Course Name", "Course Code", "Credit", "GPA"};
         Object[][] data = db.getData(regNo);
         db.stopConnection();
         table = new JTable(data, columnName);
         
-        btnBack = new JButton("Back");
+        btnBack = new CButton("Back");
         btnBack.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -59,7 +59,7 @@ public class StudentInfo {
             }
         });
         
-        panel = new JPanel(new GridBagLayout());
+        panel = new CPanel(new GridBagLayout());
         c.gridx = -1;
         c.gridy = 0;
         panel.add(lblRegNo, c);

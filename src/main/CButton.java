@@ -14,11 +14,12 @@ import javax.swing.JButton;
  * @author mainu
  */
 public class CButton extends JButton{
-    Dimension d = new Dimension(300, 100);
+    Dimension d = new Dimension(125, 30);
     
     public CButton(String text){
         super(text);
         super.setBackground(new Color(91,155,213));
         super.setForeground(Color.white);
+        super.setPreferredSize(d);
     }
 }
