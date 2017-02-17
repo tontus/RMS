@@ -8,6 +8,7 @@ package main;
 
 import calculations.CalculateCG;
 import customSwing.CButton;
+import customSwing.CFrame;
 import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -16,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -26,7 +26,7 @@ import javax.swing.JTextField;
  * @author mainu
  */
 public class ManualCgpa {
-    JFrame frame;
+    CFrame frame;
     JPanel panel;
     
     JLabel label1;
@@ -102,13 +102,12 @@ public class ManualCgpa {
         c.gridy = 5;
         panel.add(backBtn, c);
         
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame = new CFrame();
+        frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.setVisible(true);
         frame.setSize(600,768);
         frame.setLocation(300,00);
-        
     }
     private class BackBtnListener implements ActionListener{
 

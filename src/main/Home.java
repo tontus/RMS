@@ -7,6 +7,7 @@ package main;
 
 import customSwing.CPanel;
 import customSwing.CButton;
+import customSwing.CFrame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -73,13 +74,13 @@ public class Home {
         panel.add(calculateCGPABtn, c);
         
         
-        frame = new JFrame("Result Management Software");
+        frame = new CFrame("Result Management Software");
         frame.add(panel);
-        frame.setIconImage(logo.getImage());
-        frame.setSize(600,768);
-        frame.setLocation(300, 00);
+        frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
+        frame.add(panel);
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(600,768);
+        frame.setLocation(300,00);
     }
     
     private class ListenerTeacherInput implements ActionListener{

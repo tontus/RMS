@@ -7,6 +7,7 @@ package main;
 
 import calculations.Result;
 import customSwing.CButton;
+import customSwing.CFrame;
 import customSwing.CPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -14,7 +15,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -27,7 +27,7 @@ import javax.swing.JTextField;
  * @author mainu
  */
 public class TeacherDataInput {
-    JFrame frame;
+    CFrame frame;
     CPanel panel;
     
     JLabel lblCourseName;
@@ -239,8 +239,8 @@ public class TeacherDataInput {
         
         
         
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame = new CFrame();
+        frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(600, 768);
         frame.setMinimumSize(new Dimension(600, 700));

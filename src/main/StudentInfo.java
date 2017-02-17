@@ -8,6 +8,7 @@ package main;
 import calculations.CalculateCG;
 import customSwing.CPanel;
 import customSwing.CButton;
+import customSwing.CFrame;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -15,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -27,7 +27,7 @@ import static main.TeacherDataInput.noStudent;
  * @author mainu
  */
 public class StudentInfo {
-    JFrame frame;
+    CFrame frame;
     CPanel panel;
     
     JLabel lblRegNo;
@@ -99,8 +99,8 @@ public class StudentInfo {
         c.weighty=.5;
         panel.add(btnBack, c);
         
-        frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame = new CFrame();
+        frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.setLocation(300, 0);
         frame.setSize(600, 768);
         frame.add(panel);

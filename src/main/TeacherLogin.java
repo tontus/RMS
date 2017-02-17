@@ -6,6 +6,7 @@
 package main;
 
 import customSwing.CButton;
+import customSwing.CFrame;
 import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -13,7 +14,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -25,7 +25,7 @@ import javax.swing.JTextField;
  * @author mainu
  */
 public class TeacherLogin {
-    JFrame frame;
+    CFrame frame;
     JPanel panel;
     
     JLabel label;
@@ -65,9 +65,9 @@ public class TeacherLogin {
         c.gridy++;
         panel.add(btnBack, c);
         
-        frame = new JFrame("Teacher's Login");
+        frame = new CFrame("Teacher's Login");
         frame.add(panel);
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.setSize(600,768);
         frame.setLocation(300, 00);
         frame.setVisible(true);
