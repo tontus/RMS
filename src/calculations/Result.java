@@ -14,7 +14,7 @@ public class Result {
         
     }
     public double getGP(int totalClass,int totTT1, int totTT2, int totSemFinal, int atdClass, int tt1, int tt2, int semFinal){
-        int totalMarks = (tt1*10/totTT1)+(tt1*10/totTT1) + (semFinal*70/totSemFinal) + getAttendenceMark(atdClass/totalClass * 100);
+        int totalMarks = (tt1)+(tt1) + (semFinal) + getAttendenceMark(atdClass/totalClass * 100);
         
         if(totalMarks >= 80)
             return 4.0;

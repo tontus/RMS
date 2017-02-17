@@ -34,7 +34,6 @@ public class DatabaseConnection {
     }
     public void stopConnection(){
         try {
-            rs.close();
             stmt.close();
             conn.close();
         } catch (SQLException ex) {

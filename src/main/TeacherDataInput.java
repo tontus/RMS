@@ -12,11 +12,9 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -28,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class TeacherDataInput {
     JFrame frame;
-    JPanel panel;
+    CPanel panel;
     
     JLabel lblCourseName;
     JLabel lblCourseCode;
@@ -53,9 +51,9 @@ public class TeacherDataInput {
     
     JTable table;
     
-    JButton btnOkay;
-    JButton btnInput;
-    JButton btnHome;
+    CButton btnOkay;
+    CButton btnInput;
+    CButton btnHome;
     
     static int noStudent;
     boolean success = false;
@@ -75,7 +73,7 @@ public class TeacherDataInput {
         lblClassNo = new JLabel("Total Classes:");
         lblTT1 = new JLabel("Total TT1 Number: ");
         lblTT2 = new JLabel("Total TT2 Number: ");
-        lblSemFinal = new JLabel("Total semiste final number:");
+        lblSemFinal = new JLabel("Semester final Marks:");
         
         tfCourseName = new JTextField(15);
         tfCourseCode = new JTextField(15);
@@ -87,16 +85,16 @@ public class TeacherDataInput {
         tfTT2 = new JTextField(15);
         tfSemFinal = new JTextField(15);
                 
-        btnInput = new JButton("Input");
+        btnInput = new CButton("Input");
         btnInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                
-                JOptionPane.showMessageDialog(frame, "Hello");
                 Result result = new Result();
                 inputData = new Object[noStudent][5];
+                
                 for(int i=0; i<noStudent; i++)
                 {
+                    
                     inputData[i][0] = table.getValueAt(i, 0);
                     inputData[i][1] = Double.parseDouble(tfCredit.getText());
                     inputData[i][2] = tfCourseName.getText();
@@ -111,14 +109,18 @@ public class TeacherDataInput {
                             Integer.parseInt((String) table.getValueAt(i, 3)), 
                             Integer.parseInt((String) table.getValueAt(i, 4))
                     );
+                    System.out.println(""+inputData[i][0]+" " +inputData[i][1]+" "+inputData[i][2]+" "+inputData[i][3]+" "+inputData[i][4]);
                 }
-                table.getValueAt(noStudent, noStudent);
+                DatabaseConnection db = new DatabaseConnection();
+                db.startConnection();
+                db.insertData(inputData);
+                db.stopConnection();
                 
             }
         });
         
         
-        btnOkay = new JButton("Okay");
+        btnOkay = new CButton("Okay");
         btnOkay.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -130,21 +132,37 @@ public class TeacherDataInput {
                     String[] columnName = {"Registration No", "Attendence", "TT1", "TT2", "Semester Final"};
                     Object[][] data = new Object[noStudent][5];
                     table = new JTable(data, columnName);
-                    panel.add(tfClassNo, c);
-                    c.gridx = 1;
-                    c.gridy = 9;
-                    c.weighty=1;
-                    panel.add(new JScrollPane(table), c);
-                    panel.remove(btnOkay);
                     c.weighty = 0;
-                    c.gridx = -1;
+                    c.gridx = 0;
                     c.gridy = 6;
                     panel.add(lblClassNo, c);
                     c.gridx = 1;
                     c.gridy = 6;
                     panel.add(tfClassNo, c);
+                    c.gridy=7;
+                    c.gridx=0;
+                    panel.add(lblTT1,c);
+                    c.gridx=1;
+                    panel.add(tfTT1,c);
+                    c.gridy++;
+                    c.gridx=0;
+                    panel.add(lblTT2,c);
+                    c.gridx=1;
+                    panel.add(tfTT2,c);
+                    c.gridy++;
+                    c.gridx=0;
+                    panel.add(lblSemFinal,c);
+                    c.gridx=1;
+                    panel.add(tfSemFinal,c);
+                    c.gridx = 0;
+                    c.gridy+=2;
+                    c.gridwidth=2;
+                    c.weighty=1;
+                    panel.add(new JScrollPane(table), c);
+                    panel.remove(btnOkay);
+                    c.weighty=0;
                     c.gridx = 1;
-                    c.gridy = 10;
+                    c.gridy++;
                     panel.add(btnInput, c);
                     frame.revalidate();
                     frame.repaint();
@@ -159,7 +177,7 @@ public class TeacherDataInput {
             }
         });
         
-        btnHome = new JButton("Home");
+        btnHome = new CButton("Home");
         btnHome.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -171,7 +189,7 @@ public class TeacherDataInput {
         
         
          
-        panel = new JPanel(new GridBagLayout());
+        panel = new CPanel(new GridBagLayout());
         c.gridx = -1;
         c.gridy = 1;
         panel.add(lblCourseName, c);
@@ -212,7 +230,7 @@ public class TeacherDataInput {
         c.gridy = 7;
         panel.add(btnOkay, c);
         c.gridx = 1;
-        c.gridy = 11;
+        c.gridy = 21;
         panel.add(btnHome, c);
 
         
