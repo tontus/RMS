@@ -7,14 +7,12 @@ package main;
 
 import customSwing.CPanel;
 import customSwing.CButton;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -33,13 +31,14 @@ public class Home {
     
     JTextField regNoInputField;
     
-    JButton resultBtn;
-    JButton teacherInputBtn;
-    JButton calculateCGPABtn;
+    CButton resultBtn;
+    CButton teacherInputBtn;
+    CButton calculateCGPABtn;
     
     static int regNo;
     String strRegNo;
     
+    ImageIcon logo = new ImageIcon("/img/logo.png");
 
     
     Home(){
@@ -74,9 +73,9 @@ public class Home {
         panel.add(calculateCGPABtn, c);
         
         
-        frame = new JFrame();
+        frame = new JFrame("Result Management Software");
         frame.add(panel);
-        
+        frame.setIconImage(logo.getImage());
         frame.setSize(600,768);
         frame.setLocation(300, 00);
         frame.setVisible(true);
