@@ -15,10 +15,12 @@ public class CalculateCG {
     double grade, credit;
     
     public void add(double grd, double crd){
+        System.out.println(""+grd+" "+crd);
         if(grd > 0){
             credit += crd;
             grade += grd*crd;
         }
+        
     }
     public void reset(){
         credit = 0;

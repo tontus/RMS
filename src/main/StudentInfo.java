@@ -5,19 +5,21 @@
  */
 package main;
 
+import calculations.CalculateCG;
 import customSwing.CPanel;
 import customSwing.CButton;
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.Border;
 import static main.TeacherDataInput.noStudent;
 
 /**
@@ -26,15 +28,17 @@ import static main.TeacherDataInput.noStudent;
  */
 public class StudentInfo {
     JFrame frame;
-    JPanel panel;
+    CPanel panel;
     
     JLabel lblRegNo;
     JLabel lblReg;
+    JLabel lblResult;
     
     JTable table;
     
-    JButton btnBack;
-    JButton btnHome;
+    CButton btnBack;
+    CButton btnHome;
+    CalculateCG calculate;
     
     private int regNo;
     
@@ -60,16 +64,39 @@ public class StudentInfo {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
+        calculate = new CalculateCG();
+        calculate.reset();
+        for (int i=0; i<data.length; i++)
+        {
+            double a= Double.parseDouble((String) data[i][3]);
+            double b= Double.parseDouble((String) data[i][2]);
+            
+            
+            calculate.add(a,b);
+            
+        }
         
+        lblResult = new JLabel("Your current CGPA is: "+calculate.getResult()+"    You've completed: "+calculate.getCredit()+" credits");
+        
+            
+        Border border = BorderFactory.createLineBorder(Color.BLACK);
+        lblResult.setBorder(border);
         panel = new CPanel(new GridBagLayout());
-        c.gridx = -1;
+        c.gridx = 0;
         c.gridy = 0;
+        c.weighty=.25;
         panel.add(lblRegNo, c);
-        c.gridx = -1;
+        c.gridx = 0;
         c.gridy = 1;
+        c.weighty=0;
         panel.add(new JScrollPane(table), c);
         c.gridx = 0;
-        c.gridy = 2;
+        c.gridy++;
+        c.weighty=.1;
+        panel.add(lblResult,c);
+        c.gridx = 0;
+        c.gridy++;
+        c.weighty=.5;
         panel.add(btnBack, c);
         
         frame = new JFrame();
@@ -78,5 +105,25 @@ public class StudentInfo {
         frame.setSize(600, 768);
         frame.add(panel);
         frame.setVisible(true);
+    }
+    double grade, credit;
+    
+    public void add(double grd, double crd){
+        System.out.println(""+grd+" "+crd);
+        if(grd > 0){
+            credit += crd;
+            grade += grd*crd;
+        }
+        
+    }
+    public void reset(){
+        credit = 0;
+        grade = 0;
+    }
+    public double getResult(){
+        double result;
+        result = grade/credit;
+        
+        return result;
     }
 }
