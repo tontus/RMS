@@ -5,6 +5,7 @@
  */
 package main;
 
+import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -35,6 +36,8 @@ public class Home {
     static int regNo;
     String strRegNo;
     
+
+    
     Home(){
         GridBagConstraints c = new GridBagConstraints();
         label = new JLabel("Result Management Software");
@@ -43,7 +46,7 @@ public class Home {
         regNoInputField = new JTextField(11);
         
         
-        resultBtn = new JButton("See Result");
+        resultBtn = new CButton("See Result");
         resultBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -52,13 +55,14 @@ public class Home {
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
-        teacherInputBtn = new JButton("Teacher's Input");
+        teacherInputBtn = new CButton("Teacher's Input");
         teacherInputBtn.addActionListener(new ButtonListener());
-        calculateCGPABtn = new JButton("Calculate CGPA");
+        calculateCGPABtn = new CButton("Calculate CGPA");
         calculateCGPABtn.addActionListener(new CGButtonListener());
         
         
         panel = new JPanel(new GridBagLayout());
+        panel.setBackground(new Color(217,217,217));
         c.gridx = 0;
         c.gridy = 0;
         panel.add(label, c);

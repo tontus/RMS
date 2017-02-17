@@ -103,7 +103,7 @@ public class TeacherDataInput {
             public void actionPerformed(ActionEvent ae) {
 
                 try {
-                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfCredit.getText().equals("")||tfSeasson.getText().equals("")||tfClassNo.getText().equals(""))
+                    if(tfCourseCode.getText().equals("")||tfCourseName.getText().equals("")||tfCredit.getText().equals("")||tfSeasson.getText().equals(""))
                         throw new BlankBoxException();
                     noStudent = Integer.parseInt(tfNoStudent.getText());
 
@@ -116,12 +116,19 @@ public class TeacherDataInput {
                     table = new JTable(data, columnName);
                     panel.add(tfClassNo, c);
                     c.gridx = 1;
-                    c.gridy = 8;
+                    c.gridy = 9;
                     c.weighty=1;
                     panel.add(new JScrollPane(table), c);
                     panel.remove(btnOkay);
+                    c.weighty = 0;
+                    c.gridx = -1;
+                    c.gridy = 6;
+                    panel.add(lblClassNo, c);
                     c.gridx = 1;
-                    c.gridy = 9;
+                    c.gridy = 6;
+                    panel.add(tfClassNo, c);
+                    c.gridx = 1;
+                    c.gridy = 10;
                     panel.add(btnInput, c);
                     frame.revalidate();
                     frame.repaint();
@@ -182,17 +189,17 @@ public class TeacherDataInput {
         c.gridx = 1;
         c.gridy = 5;
         panel.add(tfNoStudent, c);
-        c.gridx = -1;
-        c.gridy = 6;
-        panel.add(lblClassNo, c);
-        c.gridx = 1;
-        c.gridy = 6;
-        panel.add(tfClassNo, c);
+//        c.gridx = -1;
+//        c.gridy = 6;
+//        panel.add(lblClassNo, c);
+//        c.gridx = 1;
+//        c.gridy = 6;
+//        panel.add(tfClassNo, c);
         c.gridx = 1;
         c.gridy = 7;
         panel.add(btnOkay, c);
         c.gridx = 1;
-        c.gridy = 10;
+        c.gridy = 11;
         panel.add(btnHome, c);
 
         
