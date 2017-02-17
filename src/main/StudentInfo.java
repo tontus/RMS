@@ -5,6 +5,8 @@
  */
 package main;
 
+import customSwing.CPanel;
+import customSwing.CButton;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;

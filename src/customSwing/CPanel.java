@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main;
+package customSwing;
 
 import java.awt.Color;
 import java.awt.GridBagLayout;
@@ -19,7 +19,7 @@ public class CPanel extends JPanel{
         super.setBackground(custom);
     }
 
-    CPanel(GridBagLayout gridBagLayout) {
+    public CPanel(GridBagLayout gridBagLayout) {
         super(gridBagLayout);
         super.setBackground(custom);
     }

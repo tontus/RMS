@@ -7,6 +7,8 @@ package main;
 
 
 import calculations.CalculateCG;
+import customSwing.CButton;
+import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -53,7 +55,7 @@ public class ManualCgpa {
         gpaInputField = new JTextField(10);
         creditInputField = new JTextField(10);
         
-        inputBtn = new JButton("Input");
+        inputBtn = new CButton("Input");
         inputBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
@@ -68,13 +70,13 @@ public class ManualCgpa {
                 frame.repaint();
             }
         });
-        backBtn = new JButton("Back");
+        backBtn = new CButton("Back");
         backBtn.addActionListener(new BackBtnListener());
         
         
         
         
-        panel = new JPanel(new GridBagLayout());
+        panel = new CPanel(new GridBagLayout());
         c.gridx = 1;
         c.gridy = 0;
         panel.add(creditViewer, c);
@@ -93,11 +95,11 @@ public class ManualCgpa {
         c.gridx = 1;
         c.gridy = 3;
         panel.add(gpaInputField, c);
-        c.gridx = -1;
+        c.gridx = 1;
         c.gridy = 4;
         panel.add(inputBtn, c);
         c.gridx = 1;
-        c.gridy = 4;
+        c.gridy = 5;
         panel.add(backBtn, c);
         
         frame = new JFrame();

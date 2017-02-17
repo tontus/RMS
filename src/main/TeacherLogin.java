@@ -5,6 +5,8 @@
  */
 package main;
 
+import customSwing.CButton;
+import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -50,7 +52,7 @@ public class TeacherLogin {
         btnBack = new CButton("Back");
         btnBack.addActionListener(listenerBack);
         
-        panel = new JPanel(new GridBagLayout());
+        panel = new CPanel(new GridBagLayout());
         c.gridx = 0;
         c.gridy = 0;
         panel.add(label,c);
