@@ -12,6 +12,7 @@ import customSwing.CPanel;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
@@ -137,6 +138,7 @@ public class TeacherDataInput {
                     c.weighty = 0;
                     c.gridx = 0;
                     c.gridy = 6;
+                    c.gridwidth=1;
                     panel.add(lblClassNo, c);
                     c.gridx = 1;
                     c.gridy = 6;
@@ -153,6 +155,7 @@ public class TeacherDataInput {
                     panel.add(tfTT2,c);
                     c.gridy++;
                     c.gridx=0;
+                    c.gridwidth=1;
                     panel.add(lblSemFinal,c);
                     c.gridx=1;
                     panel.add(tfSemFinal,c);
@@ -163,7 +166,7 @@ public class TeacherDataInput {
                     panel.add(new JScrollPane(table), c);
                     panel.remove(btnOkay);
                     c.weighty=0;
-                    c.gridx = 1;
+                    c.gridx = 0;
                     c.gridy++;
                     panel.add(btnInput, c);
                     frame.revalidate();
@@ -192,6 +195,7 @@ public class TeacherDataInput {
         
          
         panel = new CPanel(new GridBagLayout());
+        c.insets = new Insets(5, 2, 0, 2);
         c.gridx = -1;
         c.gridy = 1;
         panel.add(lblCourseName, c);
@@ -228,10 +232,11 @@ public class TeacherDataInput {
 //        c.gridx = 1;
 //        c.gridy = 6;
 //        panel.add(tfClassNo, c);
-        c.gridx = 1;
+        c.gridwidth=2;
+        c.gridx = 0;
         c.gridy = 7;
         panel.add(btnOkay, c);
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridy = 21;
         panel.add(btnHome, c);
 
@@ -239,7 +244,7 @@ public class TeacherDataInput {
         
         
         
-        frame = new CFrame();
+        frame = new CFrame("Teacher Data Input");
         frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.setVisible(true);
         frame.setSize(600, 768);

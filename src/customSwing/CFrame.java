@@ -18,7 +18,7 @@ public class CFrame extends JFrame {
     }
     public CFrame(String title){
         super(title);
-        super.setIconImage(new ImageIcon(getClass().getResource("/img/logo.png")).getImage());
+        super.setIconImage(new ImageIcon(getClass().getResource("/img/logo1.png")).getImage());
         super.setSize(600,768);
         super.setLocation(300, 00);
         super.setVisible(true);

@@ -10,14 +10,13 @@ import customSwing.CButton;
 import customSwing.CFrame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -25,8 +24,8 @@ import javax.swing.JTextField;
  * @author mainu
  */
 public class Home {
-    JFrame frame;
-    JPanel panel;
+    CFrame frame;
+    CPanel panel;
     
     JLabel label;
     
@@ -60,9 +59,9 @@ public class Home {
         
         
         panel = new CPanel(new GridBagLayout());
-//        panel.setBackground(new Color(217,217,217));
         c.gridx = 0;
         c.gridy = 0;
+        c.insets = new Insets(5, 2, 0, 2);
         panel.add(label, c);
         c.gridy = 1;
         panel.add(regNoInputField, c);
@@ -79,8 +78,8 @@ public class Home {
         frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
         frame.add(panel);
         frame.setVisible(true);
-        frame.setSize(600,768);
-        frame.setLocation(300,00);
+        frame.setSize(400,568);
+        frame.setLocation(400,00);
     }
     
     private class ListenerTeacherInput implements ActionListener{
@@ -88,7 +87,6 @@ public class Home {
         @Override
         public void actionPerformed(ActionEvent ae) {
             if(ae.getActionCommand().equalsIgnoreCase("Teacher's Input")){
-                System.out.println("teachers");
                 new TeacherLogin();
                 frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }

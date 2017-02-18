@@ -10,13 +10,19 @@ import customSwing.CFrame;
 import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
-import javax.swing.JButton;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
@@ -26,19 +32,35 @@ import javax.swing.JTextField;
  */
 public class TeacherLogin {
     CFrame frame;
-    JPanel panel;
+    CPanel panel;
     
     JLabel label;
     
     JTextField teacherID;
     JPasswordField password;
     
-    JButton btnLogin;
-    JButton btnBack;
+    CButton btnLogin;
+    CButton btnBack;
+    Map userList = new HashMap();
     
 
     
     TeacherLogin(){
+        File login_info = new File("teacher login.csv");
+        Scanner sc = null;
+        try {
+            sc = new Scanner(login_info);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TeacherLogin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        while (sc.hasNext())
+        {
+            String raw = sc.nextLine();
+            String[] values = raw.split(",");
+            userList.put(values[0],values[1]);
+            
+        }
+        sc.close();
         GridBagConstraints c = new GridBagConstraints();
         label = new JLabel("Please Input ID and Password");
         
@@ -53,6 +75,7 @@ public class TeacherLogin {
         btnBack.addActionListener(listenerBack);
         
         panel = new CPanel(new GridBagLayout());
+        c.insets = new Insets(5, 2, 0, 2);
         c.gridx = 0;
         c.gridy = 0;
         panel.add(label,c);
@@ -84,12 +107,18 @@ public class TeacherLogin {
     ActionListener listenerLogin = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent ae) {
-            String id = teacherID.getText();
-            String pass = password.getText();
-            if(id.equals("admin") && pass.equals("admin")){
-                new TeacherDataInput();
-                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+            String pass = (String) userList.get(teacherID.getText());
+                try {
+                    if(pass.equals(password.getText())){
+                        new TeacherDataInput();
+                        frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(panel, "Login Failed!!!","ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+                }catch (NullPointerException el) {
+                    JOptionPane.showMessageDialog(panel, "Login Failed!!!","ERROR",JOptionPane.ERROR_MESSAGE);
+                }
             }
-        }
     };
 }

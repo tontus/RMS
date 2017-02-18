@@ -12,13 +12,12 @@ import customSwing.CFrame;
 import customSwing.CPanel;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.text.DecimalFormat;
-import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
@@ -27,7 +26,7 @@ import javax.swing.JTextField;
  */
 public class ManualCgpa {
     CFrame frame;
-    JPanel panel;
+    CPanel panel;
     
     JLabel label1;
     JLabel label2;
@@ -37,9 +36,9 @@ public class ManualCgpa {
     JTextField gpaInputField;
     JTextField creditInputField;
     
-    JButton calculateBtn;
-    JButton inputBtn;
-    JButton backBtn;
+    CButton calculateBtn;
+    CButton inputBtn;
+    CButton backBtn;
     
     static double credit = 0, grade = 0;
     
@@ -77,14 +76,18 @@ public class ManualCgpa {
         
         
         panel = new CPanel(new GridBagLayout());
-        c.gridx = 1;
+        c.insets = new Insets(5, 2, 0, 2);
+        c.gridx = 0;
         c.gridy = 0;
+        c.gridwidth=2;
         panel.add(creditViewer, c);
-        c.gridx = 1;
+        c.gridx = 0;
         c.gridy = 1;
+        c.gridwidth=2;
         panel.add(cgpViewer, c);
         c.gridx = -1;
         c.gridy = 2;
+        c.gridwidth=1;
         panel.add(label1, c);
         c.gridx = 1;
         c.gridy = 2;
