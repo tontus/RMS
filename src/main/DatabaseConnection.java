@@ -84,25 +84,6 @@ public class DatabaseConnection {
         return results;
     }
      
-    
-    public static void main(String[] args) {
-        DatabaseConnection data =new DatabaseConnection();
-        data.startConnection();
-        
-        try {
-            stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO `results` VALUES (NULL, '6', '3', 'fgert', 'efdsrt', '7');");
-            int size=0;
-            while (rs.next()) {
-                size++;
-            }rs.beforeFirst();
-        while (rs.next())
-            System.out.println(""+rs.getString("gpa"));
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseConnection.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        data.stopConnection();
-}
 
    
    

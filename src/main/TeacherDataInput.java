@@ -61,8 +61,6 @@ public class TeacherDataInput {
     static int noStudent;
     boolean success = false;
     
-//    Object[][] data;
-    
     static Object[][] inputData;
     
     TeacherDataInput(){
@@ -95,6 +93,7 @@ public class TeacherDataInput {
                 Result result = new Result();
                 inputData = new Object[noStudent][5];
                 
+                try{
                 for(int i=0; i<noStudent; i++)
                 {
                     
@@ -110,15 +109,20 @@ public class TeacherDataInput {
                             Integer.parseInt((String) table.getValueAt(i, 1)), 
                             Integer.parseInt((String) table.getValueAt(i, 2)), 
                             Integer.parseInt((String) table.getValueAt(i, 3)), 
-                            Integer.parseInt((String) table.getValueAt(i, 4))
-                    );
-                    System.out.println(""+inputData[i][0]+" " +inputData[i][1]+" "+inputData[i][2]+" "+inputData[i][3]+" "+inputData[i][4]);
+                            Integer.parseInt((String) table.getValueAt(i, 4)));
+                }
+                }catch(Exception e)
+                {
+                    JOptionPane.showMessageDialog(frame, "Please Don't leave any box blank ","ERROR",JOptionPane.ERROR_MESSAGE);
+                    throw e;
                 }
                 DatabaseConnection db = new DatabaseConnection();
                 db.startConnection();
                 db.insertData(inputData);
                 db.stopConnection();
-                
+                JOptionPane.showMessageDialog(frame, "You've successfully inserted "+noStudent+" data!!!","Success",JOptionPane.INFORMATION_MESSAGE);
+                new TeacherDataInput();
+                frame.dispatchEvent(new WindowEvent(frame, WindowEvent.WINDOW_CLOSING));
             }
         });
         
@@ -177,7 +181,6 @@ public class TeacherDataInput {
                     }
                 catch(NumberFormatException e){
                     JOptionPane.showMessageDialog(frame, "Please enter a valid number ","ERROR",JOptionPane.ERROR_MESSAGE);
-//                    throw e;
                 }
             }
         });
@@ -226,12 +229,6 @@ public class TeacherDataInput {
         c.gridx = 1;
         c.gridy = 5;
         panel.add(tfNoStudent, c);
-//        c.gridx = -1;
-//        c.gridy = 6;
-//        panel.add(lblClassNo, c);
-//        c.gridx = 1;
-//        c.gridy = 6;
-//        panel.add(tfClassNo, c);
         c.gridwidth=2;
         c.gridx = 0;
         c.gridy = 7;
@@ -252,11 +249,8 @@ public class TeacherDataInput {
         frame.setLocation(300,000);
         frame.add(panel);
     }
-    public static void main(String[] args) {
-        TeacherDataInput td = new TeacherDataInput();
-    }
+    
    
-
     private static class BlankBoxException  extends Exception {
        
     }

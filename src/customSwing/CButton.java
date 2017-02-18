@@ -9,10 +9,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 
 /**
  *

@@ -91,8 +91,8 @@ public class TeacherLogin {
         frame = new CFrame("Teacher's Login");
         frame.add(panel);
         frame.setDefaultCloseOperation(CFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(600,768);
-        frame.setLocation(300, 00);
+        frame.setSize(400,568);
+        frame.setLocation(400,00);
         frame.setVisible(true);
     }
     
